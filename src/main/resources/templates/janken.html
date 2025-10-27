@@ -1,30 +1,30 @@
 <!DOCTYPE html>
-<html lang="ja" xmlns:th="">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <title>Janken Game</title>
 </head>
 
 <body>
-  <h1>じゃんけんページ</h1>
-  <div th:if="${username != null and !username.isEmpty()}">
-    <h2 th:text="'Hi '+${username}"></h2>
-  </div>
-  <h2>何を出すか選んでください</h2>
-  <p>
-    <a href="/janken/play?myhand=グー">グー</a>
-    <a href="/janken/play?myhand=チョキ">チョキ</a>
-    <a href="/janken/play?myhand=パー">パ＾</a>
-  </p>
-  <div th;if="${result != null}">
-    <hr>
-    <h2>結果</h2>
-    <p>あなたの手: <span th:text="${myHand}"></span></p>
-    <p>相手の手: <span th:text="${cpuHand}"></span></p>
-    <h3>結果: <span th:text="${result}"></span></h3>
-    <hr>
-  </div>
+  <a href="/logout">ログアウト</a>
+
+  <h1>Janken GAME!</h1>
+
+  <p>Hi [[${username}]]</p>
+
+  <h2>エントリー</h2>
+  <ul>
+    <li th:each="user : ${users}"><a th:href="@{/match(id=${user.id})}"> [[${user.name}]]</a></li>
+  </ul>
+
+  <h2>試合結果</h2>
+
+  <li th:each="match : ${matches}"
+    th:text="'id:' + ${match.id} + ' user1:' + ${match.user1} + ' user2:' + ${match.user2} + ' user1の手:' + ${match.user1Hand} + ' user2の手:' + ${match.user2Hand}">
+  </li>
+
+
 </body>
 
 </html>

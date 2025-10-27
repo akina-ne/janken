@@ -31,7 +31,10 @@ public class JankenAuthConfiguration {
             .requestMatchers("/janken/**").authenticated() // /sample3/以下は認証済みであること
             .anyRequest().permitAll()) // 上記以外は全員アクセス可能
         .csrf(csrf -> csrf
-            .ignoringRequestMatchers("/janken*/**")); // sample2用にCSRF対策を無効化
+            .ignoringRequestMatchers("/h2-console/*", "/janken*/**"))
+        .headers(headers -> headers
+            .frameOptions(frameOptions -> frameOptions
+                .sameOrigin())); // sample2用にCSRF対策を無効化
     return http.build();
   }
 
@@ -52,10 +55,12 @@ public class JankenAuthConfiguration {
         .password("{bcrypt}$2y$05$H8NbkKRU6j3NmyBXn7gi.et.p.zBj/QV4alNwtyf0qsvAHeGvXT4y").roles("USER").build();
     UserDetails user2 = User.withUsername("user2")
         .password("{bcrypt}$2y$05$H8NbkKRU6j3NmyBXn7gi.et.p.zBj/QV4alNwtyf0qsvAHeGvXT4y").roles("USER").build();
+    UserDetails ほんだ = User.withUsername("ほんだ")
+        .password("{bcrypt}$2y$05$j8EKyuRJ.15EiyxIsz7A2OcsV1qgj6dg01rHo.hyOC.5yWYr5S/Q2").roles("USER").build();
     UserDetails admin = User.withUsername("admin")
         .password("{bcrypt}$2y$10$ngxCDmuVK1TaGchiYQfJ1OAKkd64IH6skGsNw1sLabrTICOHPxC0e").roles("ADMIN").build();
 
     // 生成したユーザをImMemoryUserDetailsManagerに渡す（いくつでも良い）
-    return new InMemoryUserDetailsManager(user1, user2, admin);
+    return new InMemoryUserDetailsManager(user1, user2, ほんだ, admin);
   }
 }

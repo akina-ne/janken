@@ -1,41 +1,36 @@
 package oit.is.z2974.kaizi.janken.model;
 
 public class Janken {
-  private String userName;
   private String myHand; // あなたの手
-  private String cpuHand; // 相手の手
+  private String cpuHand = "Gu"; // 相手の手
   private String result; // 結果
 
   // GetterとSetterを追加
-  public String getUserName() {
-    return userName;
-  }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
-  }
-
-  public String getMyHand() {
-    return myHand;
-  }
-
-  public void setMyHand(String myHand) {
+  public Janken(String myHand) {
     this.myHand = myHand;
+    this.judge();
   }
 
+  // 勝敗判定ロジック
+  private void judge() {
+    if (myHand.equals(cpuHand)) {
+      this.result = "Draw";
+    } else if ((myHand.equals("Gu") && cpuHand.equals("Choki")) ||
+        (myHand.equals("Choki") && cpuHand.equals("Pa")) ||
+        (myHand.equals("Pa") && cpuHand.equals("Gu"))) {
+      this.result = "You Win!";
+    } else {
+      this.result = "You Lose...";
+    }
+  }
+
+  // Getter
   public String getCpuHand() {
-    return cpuHand;
+    return this.cpuHand;
   }
 
-  public void setCpuHand(String cpuHand) {
-    this.cpuHand = cpuHand;
-  }
-
-  public String getResult() {
-    return result;
-  }
-
-  public void setResult(String result) {
-    this.result = result;
+  public String getresult() {
+    return this.result;
   }
 }
