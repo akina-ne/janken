@@ -9,7 +9,7 @@
 <body>
   <a href="/logout">ログアウト</a>
 
-  <h1>Janken GAME!</h1>
+  <h1>Janken Game!</h1>
 
   <p>Hi [[${username}]]</p>
 
@@ -17,6 +17,11 @@
   <ul>
     <li th:each="user : ${users}"><a th:href="@{/match(id=${user.id})}"> [[${user.name}]]</a></li>
   </ul>
+
+  <h2>アクティブな試合</h2>
+  <li th:each="matchInfo : ${activeMatches}"
+    th:text="'id:' + ${matchInfo.id} + ' user1:' + ${matchInfo.user1} + ' user2:' + ${matchInfo.user2} + ' isActive:' + ${matchInfo.isActive}">
+  </li>
 
   <h2>試合結果</h2>
 

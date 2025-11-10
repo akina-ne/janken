@@ -52,15 +52,17 @@ public class JankenAuthConfiguration {
     // user1/p@ss,user2/p@ss,admin/p@ss
 
     UserDetails user1 = User.withUsername("user1")
-        .password("{bcrypt}$2y$05$H8NbkKRU6j3NmyBXn7gi.et.p.zBj/QV4alNwtyf0qsvAHeGvXT4y").roles("USER").build();
+        .password("{bcrypt}$2y$05$cGDRulsz2Yt1TdnUfAEvwe/nw8.1xV4sOmz8ryXkQBwJyFdbq4C86").roles("USER").build();
     UserDetails user2 = User.withUsername("user2")
-        .password("{bcrypt}$2y$05$H8NbkKRU6j3NmyBXn7gi.et.p.zBj/QV4alNwtyf0qsvAHeGvXT4y").roles("USER").build();
+        .password("{bcrypt}$2y$05$uorCGpa9i/F5.btgqb7x9O.oFwci45/LWXqbMavVasK60gcESELjC").roles("USER").build();
     UserDetails ほんだ = User.withUsername("ほんだ")
-        .password("{bcrypt}$2y$05$j8EKyuRJ.15EiyxIsz7A2OcsV1qgj6dg01rHo.hyOC.5yWYr5S/Q2").roles("USER").build();
+        .password("{bcrypt}$2y$05$PbEztNrlA0IU2HbEHsC7IeM3RP7K8tVF2c40aF58kX.sT2CiMbbLW").roles("USER").build();
+    UserDetails いがき = User.withUsername("いがき")
+        .password("{bcrypt}$2y$05$vZG2dLwEyWuqWhlwbr/kGeEG3nglDC0Ap6epi18A1YwVrK/vfqB3m").roles("USER").build();
     UserDetails admin = User.withUsername("admin")
-        .password("{bcrypt}$2y$10$ngxCDmuVK1TaGchiYQfJ1OAKkd64IH6skGsNw1sLabrTICOHPxC0e").roles("ADMIN").build();
+        .password("{bcrypt}$2y$05$yrvUWhG5jMEB6btvpufFH.tC6jvvVhoo40CLey0cgfPFzl57WBlTS").roles("ADMIN").build();
 
     // 生成したユーザをImMemoryUserDetailsManagerに渡す（いくつでも良い）
-    return new InMemoryUserDetailsManager(user1, user2, ほんだ, admin);
+    return new InMemoryUserDetailsManager(user1, user2, ほんだ, いがき, admin);
   }
 }
