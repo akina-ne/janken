@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Waiting</title>
+</head>
+
+<body>
+
+  <h1>相手の手を待ってます</h1>
+  <p>Hi [[${username}]]</p>
+
+  <div id="kekka-area">
+  </div>
+
+
+  <script>
+    const sse = new EventSource('/kekka');
+    sse.onmessage = function (event) {
+      // 結果を挿入する対象のdivを取得
+      const kekkaArea = document.getElementById('kekka-area');
+      const matches = JSON.parse(event.data);
+
+      // 挿入するHTMLコンテンツを生成
+      let htmlContent = '<h2>結果</h2>'; // 「結果」という見出しを追加
+      matches.forEach(match => {
+        // Matchオブジェクトのプロパティ名を小文字始まりのキャメルケースに合わせる
+        const user1Hand = match.user1Hand;
+        const user2Hand = match.user2Hand;
+
+        // "Match: id 4 user1: 3..." の形式で文字列を作成
+        htmlContent += `<p>Match: id ${match.id} user1: ${match.user1} user2: ${match.user2} user1Hand: ${user1Hand} user2Hand: ${user2Hand}</p>`;
+      });
+      htmlContent += '<p><a href="/janken">もどる</a></p>';
+
+      // innerHTMLを '=' (上書き) から '+=' (追記) にすると元の表示が消えてしまうため、
+      // 用意した空のdivに結果を '上書き' するのがシンプルで確実です。
+      kekkaArea.innerHTML = htmlContent;
+
+      sse.close();
+    };
+  </script>
+
+</body>
+
+</html>

@@ -16,9 +16,9 @@
 
   <h2>手を選んでください</h2>
   <p>
-    <a th:href="@{/fight(opponentId=${opponent.id}, myHand='Gu')}">グー</a> |
-    <a th:href="@{/fight(opponentId=${opponent.id}, myHand='Choki')}">チョキ</a> |
-    <a th:href="@{/fight(opponentId=${opponent.id}, myHand='Pa')}">パー</a>
+    <a th:href="@{/wait(opponentId=${opponent.id}, myHand='Gu')}">グー</a> |
+    <a th:href="@{/wait(opponentId=${opponent.id}, myHand='Choki')}">チョキ</a> |
+    <a th:href="@{/wait(opponentId=${opponent.id}, myHand='Pa')}">パー</a>
   </p>
 
   <div th:if="${result != null}">
